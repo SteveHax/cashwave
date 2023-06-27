@@ -1,0 +1,178 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+    class Account {
+        constructor(balance) {
+            this.balance = balance;
+            this.lastDepositTime = new Date(0);
+        }
+
+        deposit(amount) {
+            let currentTime = new Date();
+            let timeDiff = (currentTime - this.lastDepositTime)/1000;
+            if (timeDiff >= 20){
+                // only allow deposit once in every 20 seconds
+                let depositAmount= ' ';
+         let transactionID= ' ';
+                if(depositAmount.value && transactionID.value==='') {
+                    alert('Please fill all fields')
+                } else {
+                    if (amount <= 2000 && amount >= 50) { 
+                        this.balance += amount;
+                        this.lastDepositTime = currentTime;
+                        alert("Deposit Successful!  \nUpdating account balance......")
+                    } else {
+                        alert("Minimum deposit is ¢50 and Maximum is ¢2000")
+                    }
+                }
+            }
+            else {
+                alert("You can only deposit once in every 1 minute.")
+            }
+        }
+
+        withdraw(amount) {
+            if(amount > this.balance) {
+                return false;
+            }
+            this.balance -= amount;
+            return true;
+        }
+    }
+
+    const main = () => {
+        let balance = document.querySelector("#balance"),
+            depositAmount = document.querySelector("#deposit-amount"),
+            withdrawAmount = document.querySelector("#withdraw-amount"),
+            depositBtn = document.querySelector("#deposit-btn"),
+            withdrawBtn = document.querySelector("#withdraw-btn"),
+            transactionID = document.querySelector("#transactionID");
+        
+        let account = new Account(5);
+
+        const updateBalance = () => {
+            balance.innerHTML = "¢" + account.balance;
+        }
+
+        updateBalance();
+
+        depositBtn.addEventListener("click", () => {
+            if(depositAmount.value && transactionID.value===''){
+                alert('Please fill all fields')
+            } else {
+                let amount = Number(depositAmount.value);
+                depositAmount.value = "";
+                if (amount <= 2000 && amount >= 50) {
+                    account.deposit(amount);
+                    setTimeout(updateBalance, 10000);
+                } else {
+                    alert("Minimum deposit is ¢50 and Maximum is ¢2000");
+                }
+            }
+        });
+    }
+    onload = main;
+
+     
+        </script>
+     <style>
+    body{
+    justify-content :center;
+    display:flex;
+    font-size:15px;
+    background-color:#222;
+   
+  
+    
+}
+
+.card{
+    width:320px;
+    height:490px;
+    border-radius:25px;
+    margin-top:15px;
+    margin-right:15px;
+    padding-top:15px;
+    padding-left:7px;
+    padding-right:7px;
+}
+
+.card-front{
+    background-color:orange;
+    
+    
+}
+
+.cls0
+ {
+     border:5px solid black;
+     border-radius:10px;
+     display: flex;
+     padding-top:20px;
+     padding-bottom:5px;
+ }       
+ 
+.cls1
+{
+ padding-top: 5px;
+            
+}
+        
+ a {
+  text-decoration: none;
+  color:black;
+  }
+  
+   </style>     
+    
+    
+    </head>
+    <body>
+    <div class="container">
+        <div class="card">
+            <div class="card card-front">
+               <div class="cls0">
+   <br><br>
+   <img src="images/profile.png" width="80px">
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
+ <center><b><i>ACCOUNT
+ BALANCE</i>
+  <p><i id="balance">$100</i></p></b>
+      <br>
+      </center>
+      </div>
+ 
+ <center>
+ <div class="cls1">
+     <br>
+ Network: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  MTN
+        <br>
+        <br><br>
+   
+      Name: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Steve Haxx
+        <br><br>
+        <br>
+      &nbsp  Number: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  0595598872
+        <br>
+        <br>
+        <br>
+     &nbsp   Reference ID: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp CW2000
+        <br><br><br>
+        
+        <center>
+        <input type="number" placeholder="&nbsp &nbsp Enter transaction ID here" id="transactionID" required>
+        <br><br>
+<input type="number" id="deposit-amount" placeholder="&nbsp &nbsp &nbsp Enter amount deposited"><br><br>
+<button id="deposit-btn"> Submit</button>
+   <!-- 
+     <br>
+<input type="number" id="withdraw-amount" placeholder="Enter amount in $">
+<button id="withdraw-btn"> Withdraw</button>
+   <hr width="100%" color="Black"> -->
+     <br>
+   
+    
+            </div>
+        </div>
+    </div>
+    </body>

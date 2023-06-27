@@ -1,0 +1,146 @@
+<!-- Created by Ferhat Teker -->
+
+<!-- Created by Stephen Anim -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>task</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row1">
+            <div class="field" id="balance"></div>
+            <br>
+            <div style="color:black;" class="countdown" id="countdown">Select Task to Begin...</div>
+        </div>
+        <div class="row">
+            <div class="field" onclick="deductAmount(50, 5)"><img src="images/salary.png" width="90px"><br><br>PRINCIPAL:
+                ¢50<br>PROFIT: ¢5<br></div>
+            <div class="field" onclick="deductAmount(100, 10)"><img src="images/salary.png" width="90px"><br><br>PRINCIPAL:
+                ¢100<br>PROFIT: ¢10<br></div>
+        </div>
+        <div class="row">
+            <div class="field" onclick="deductAmount(200, 20)"><img src="images/salary1.png" width="90px"><br><br>PRINCIPAL:
+                ¢200<br>PROFIT: ¢20<br></div>
+            <div class="field" onclick="deductAmount(250, 25)"><img src="images/salary1.png" width="90px"><br><br>PRINCIPAL:
+                ¢250<br>PROFIT: ¢25<br></div>
+        </div>
+        <div class="row">
+            <div class="field" onclick="deductAmount(500, 55)"><img src="images/salary2.png" width="90px"><br><br>PRINCIPAL:
+                ¢500<br>PROFIT: ¢55<br></div>
+            <div class="field" onclick="deductAmount(700, 75)"><img src="images/salary2.png" width="90px"><br><br>PRINCIPAL:
+                ¢700<br>PROFIT: ¢75<br></div>
+        </div>
+        <div class="row">
+            <div class="field" onclick="deductAmount(1000, 120)"><img src="images/salary3.png" width="90px"><br><br>PRINCIPAL:
+                ¢1000<br>PROFIT: ¢120<br></div>
+            <div class="field" onclick="deductAmount(1500, 160)"><img src="images/salary3.png" width="90px"><br><br>PRINCIPAL:
+                ¢1500<br>PROFIT: ¢160<br></div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<script>
+    let balance = 5;
+    let clicked = false;
+    document.getElementById("balance").innerHTML = "Account Balance: ¢" + balance;
+
+    function deductAmount(principal, profit) {
+        if (!clicked) {
+            if (balance >= principal) {
+                balance -= principal;
+                document.getElementById("balance").innerHTML = "Account Balance: ¢" + balance;
+                clicked = true;
+                startCountdown(principal, profit); // Pass the 'principal' and 'profit' to the startCountdown function
+            } else {
+                alert("You don't have sufficient balance to perform this task!");
+            }
+        } else {
+            alert("Today's task is complete!");
+        }
+    }
+
+    function startCountdown(principal, profit) {
+        let seconds = 5;
+        let countdown = setInterval(() => {
+            document.getElementById("countdown").innerHTML = "Next task in: " + seconds + " s";
+            seconds--;
+            if (seconds < 0) {
+                clearInterval(countdown);
+                balance += (principal + profit); // Update the balance by adding the 'principal' and 'profit'
+                document.getElementById("balance").innerHTML = "Account Balance: ¢" + balance;
+                document.getElementById("countdown").innerHTML = "Next task ready";
+                clicked = false;
+                setTimeout(() => {
+                    startCountdown(principal, profit); // Pass the 'principal' and 'profit' to continue countdown
+                }, 60000);
+            }
+        }, 1000);
+    }
+</script>
+
+<style>
+    /* Add your CSS styles here */
+/* Created by Ferhat Teker */
+
+/* Created by Stephen Anim */
+
+/* Created by Jarvis */
+
+/* Created by Stephen Anim */ 
+ 
+body{
+            background-color:black;
+        }
+
+        .container{
+            margin: 0 auto;
+            width: 50%;
+          
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        .row{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+.field{
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 15px 0px 15px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            font-size: 11px;
+            background-color: orange;
+        }
+
+        .countdown{
+            font-size:12px;
+            padding: 12px 15px;
+            text-align:center;
+            margin-top:10px;
+            border: 2px solid black;
+            border-radius: 30px 0px 30px 0px;
+            background-color:orange;
+            
+        }
+        #balance{
+            background-color: black;
+            margin-top:-100px;
+        }
+   
+</style>

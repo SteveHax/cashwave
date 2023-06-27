@@ -1,0 +1,165 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+     <script>
+        var accountBalance = 5;
+        var withdrawalHistory = [];
+
+        function withdraw() {
+            var withdrawalAmount = parseInt(document.getElementById("withdrawalAmount").value);
+            if (withdrawalAmount < 50) {
+                alert("Minimum withdrawal is ¢50.");
+                return;
+            }
+            if (accountBalance - withdrawalAmount < 0) {
+                alert("Insufficient funds.");
+                return;
+            }
+            var timestamp = Math.floor(Date.now() / 1000);
+            if (withdrawalHistory.length > 0) {
+                var lastWithdrawal = withdrawalHistory[withdrawalHistory.length - 1];
+                if (lastWithdrawal.timestamp >= timestamp - 10) {
+                    alert("You can only withdraw once every 10 seconds.");
+                    return;
+                }
+            }
+            accountBalance -= withdrawalAmount;
+            withdrawalHistory.push({
+                amount: withdrawalAmount,
+                timestamp: timestamp
+            });
+            document.getElementById("accountBalance").innerHTML = accountBalance;
+            document.getElementById("withdrawalAmount").value = "";
+            displayWithdrawalHistory();
+        }
+
+        function displayWithdrawalHistory() {
+            var tbody = document.getElementById("withdrawalHistory");
+            tbody.innerHTML = "";
+            withdrawalHistory.forEach(function(withdrawal) {
+                var tr = document.createElement("tr");
+                var tdAmount = document.createElement("td");
+                tdAmount.innerHTML = "¢" + withdrawal.amount;
+                tr.appendChild(tdAmount);
+                var tdTimestamp = document.createElement("td");
+                var date = new Date(withdrawal.timestamp * 1000);
+                var day = ("0" + date.getDate()).slice(-2);
+                var month = ("0" + (date.getMonth() + 1)).slice(-2);
+                var year = date.getFullYear();
+                var hours = ("0" + date.getHours()).slice(-2);
+                var minutes = ("0" + date.getMinutes()).slice(-2);
+                var seconds = ("0" + date.getSeconds()).slice(-2);
+                tdTimestamp.innerHTML = day + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + seconds;
+                tr.appendChild(tdTimestamp);
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+    
+     <style>
+    body{
+    justify-content :center;
+    display:flex;
+    font-size:15px;
+    background-color:#222;
+   
+  
+    
+}
+
+.card{
+    width:320px;
+    height:520px;
+    border-radius:25px;
+    margin-top:15px;
+    margin-right:15px;
+    padding-top:15px;
+    padding-left:7px;
+    padding-right:7px;
+}
+
+.card-front{
+    background-color:orange;
+    
+    
+}
+
+.cls0
+ {
+     border:5px solid black;
+     border-radius:10px;
+     display: flex;
+     padding-top:20px;
+     padding-bottom:5px;
+ }       
+ 
+.cls1
+{
+ padding-top: 5px;
+            
+}
+        
+ a {
+  text-decoration: none;
+  color:black;
+  }
+  
+     table {
+            color:orange;
+            font-size:1px;
+        }
+        td {
+            padding: 0px;
+            border: 1px solid none;
+            color:orange;
+            font-size:1px;
+        }
+   </style>     
+    
+    
+    </head>
+    <center>
+    <body>
+    <div class="container">
+        <div class="card">
+            <div class="card card-front">
+               <div class="cls0">
+   
+   <img src="images/profile.png" width="80px">
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+ <center><b><i><p>ACCOUNT<br>BALANCE<br><br>¢<span id="accountBalance">5</span></p></i></b>
+      <br>
+      </center>
+      </div>
+ 
+ <center>
+ <div class="cls1">
+      
+   <center><h3>Enter withdrawal details</h3></center><br><br>
+        <center>
+      
+      <input type="text" placeholder="&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Network @ MTN" required>
+      <br><br><br>
+      <input type="text" placeholder="&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Account name" required>
+      <br><br><br>
+      <input type="tel" placeholder="&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Unique ID" maxlength= "5" required>
+  
+   
+     <br><br><br>
+  <input type="number" id="withdrawalAmount" min="30" placeholder="&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Amount"><br><br><br>
+    <button onclick="withdraw()">Withdraw</button>
+
+ <table>
+        <tr>
+            <th>Withdrawal Amount</th>
+            <th>Timestamp</th>
+        </tr>
+        <tbody id="withdrawalHistory"></tbody>
+    </table>
+             <center>
+            </div>
+        </div>
+    </div>
+  </body>
+</center>

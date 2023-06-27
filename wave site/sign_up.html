@@ -1,0 +1,104 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      function show() {
+        alert("Sign up successful");
+      }
+
+      function val() {
+        var a = document.getElementById("first").value
+        var b = document.getElementById("sec").value
+        if(a !== b) {
+            document.getElementById("er1").innerHTML="Password does not match"
+        } else {
+            document.getElementById("er1").innerHTML=""
+        }
+        if(a === b){
+            document.getElementById("er2").innerHTML="Password matched"
+        } else {
+            document.getElementById("er2").innerHTML=""
+        }
+        if(a === "" || b === "") {
+            document.getElementById("er1").innerHTML="";
+            document.getElementById("er2").innerHTML="";
+        }
+    }       
+
+
+    function validate() {
+      var phone = document.getElementById('tel');
+      var password = document.getElementById("first");
+      var confirmPassword = document.getElementById("sec");
+      var invitationCode = document.getElementById('invitation');
+      var uniqueCode = document.getElementById('unique');
+      
+    if (phone.value === "" || password.value === "" || confirmPassword.value === "" || invitationCode.value === "" || uniqueCode.value === "")  {
+        alert("One or more fields are blank. Please fill all the fields before submitting.")
+      } else {
+        show();
+      }
+    }
+</script>
+   <style>
+       a
+       {
+           text-decoration:none;
+       }
+    body{
+    justify-content : center;
+    flex: 1;
+    font-size:15px;
+    background-color:#222;
+    
+}
+
+.card{
+    width:320px;
+    height:420px; 
+    border-radius:25px;
+    margin-top:80px;
+}
+
+.card-front{
+    background-color:orange;
+}
+
+img{
+    border-radius:25px 5px 25px 5px;
+    border: 2px solid orange;
+}
+   </style>   
+    </head>
+    
+    
+    <body>
+    <center>
+    <div class="container">
+        <div class="card">
+            <div class="card card-front">
+                <br>
+               <center><img src="images/logo.png" width="90px">
+            <br><br>
+          <b>SIGN UP</b>
+               <br><br>
+ <input type="tel" id="tel" placeholder="Phone" maxlength="12">
+               <br><br>
+<input type="password" id="first" placeholder="Password" maxlength="10" autocomplete="on"> 
+<br />
+<br /> <input type="password" id="sec" onkeyup="val()" placeholder="Confirm password" maxlength="10" autocomplete="on">
+      <br />
+        <small id="er1" style="color:red;"></small>
+        <small id="er2" style="color:green;"></small>
+               <br>
+   <input type="text" id="invitation" placeholder="Invitation code" maxlength="4" >
+               <br><br>
+   <input type="text" id="unique" placeholder="Create unique code" maxlength="4">
+               <br><br>
+<button onclick="validate()">submit</button> 
+               <br><br>
+               Already have an account? <a href="login.html">login</a>
+               </center>
+        </div>
+    </div>
+    </center> 
+    </body>
