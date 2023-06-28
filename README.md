@@ -1,1 +1,1 @@
-# cashwave
+# cashwave app
